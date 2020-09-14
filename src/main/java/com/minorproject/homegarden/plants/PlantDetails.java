@@ -7,6 +7,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -22,7 +23,8 @@ public class PlantDetails {
 	private String imageUrl;
 	private String temperature;
 	private String water;
-	@Column(nullable = false, name = "plant_description", columnDefinition = "TEXT", length = 1000000)
+	@Lob
+	@Column(nullable = false, name = "plant_description")
 	private String description;
 	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "plantInfo")
 	private PlantCareDetails careInfo;
