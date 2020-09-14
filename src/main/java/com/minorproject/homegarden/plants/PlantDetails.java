@@ -18,11 +18,11 @@ public class PlantDetails {
 	private Long id;
 	@Column(name = "plant_name", nullable = false, unique = true)
 	private String name;
-	@Column(name = "image_url")
+	@Column(name = "image_url", columnDefinition = "TEXT", length = 1000000)
 	private String imageUrl;
 	private String temperature;
 	private String water;
-	@Column(nullable = false, name = "plant_description", columnDefinition = "text", length = 10000)
+	@Column(nullable = false, name = "plant_description", columnDefinition = "TEXT", length = 1000000)
 	private String description;
 	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "plantInfo")
 	private PlantCareDetails careInfo;

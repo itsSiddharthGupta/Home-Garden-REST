@@ -12,13 +12,13 @@ import javax.persistence.Table;
 public class PlantCareDetails {
 	@Id
 	private Long id;
-	@Column(name = "water_details")
+	@Column(name = "water_details", columnDefinition = "TEXT", length = 1000000)
 	private String waterDetails;
-	@Column(name = "temperature_details")
+	@Column(name = "temperature_details", columnDefinition = "TEXT", length = 1000000)
 	private String temperatureDetails;
-	@Column(name = "light_details")
+	@Column(name = "light_details", columnDefinition = "TEXT", length = 1000000)
 	private String lightDetails;
-	@Column(name = "soil_details")
+	@Column(name = "soil_details", columnDefinition = "TEXT", length = 1000000)
 	private String soilDetails;
 	@OneToOne
 	@MapsId
