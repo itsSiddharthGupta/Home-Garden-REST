@@ -12,13 +12,13 @@ public class PlantService {
 
 	public PlantDetails addPlant(PlantDetails details) {
 		PlantDetails plant = new PlantDetails(details.getName(), details.getDescription());
-		plant.setCareInfo(details.getCareInfo());
 		plant.setTemperature(details.getTemperature());
 		plant.setWater(details.getWater());
 		PlantCareDetails care = new PlantCareDetails(details.getCareInfo().getWaterDetails(),
 				details.getCareInfo().getTemperatureDetails(), details.getCareInfo().getLightDetails(),
 				details.getCareInfo().getSoilDetails());
 		care.setPlantInfo(plant);
+		plant.setCareInfo(care);
 		return plantsRepo.save(plant);
 	}
 }
