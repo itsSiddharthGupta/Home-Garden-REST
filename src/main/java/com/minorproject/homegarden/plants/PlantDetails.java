@@ -21,6 +21,8 @@ public class PlantDetails {
 	private String name;
 	@Column(name = "image_url", columnDefinition = "TEXT", length = 1000000)
 	private String imageUrl;
+	@Column(name = "is_indoor_plant")
+	private Boolean isIndoor;
 	private String temperature;
 	private String water;
 	@Lob
@@ -29,9 +31,13 @@ public class PlantDetails {
 	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "plantInfo")
 	private PlantCareDetails careInfo;
 
-	public PlantDetails(String name, String description) {
+	public PlantDetails() {
+	}
+
+	public PlantDetails(String name, String description, Boolean isIndoor) {
 		this.description = description;
 		this.name = name;
+		this.isIndoor = isIndoor;
 	}
 
 	public Long getId() {
@@ -62,6 +68,14 @@ public class PlantDetails {
 		return careInfo;
 	}
 
+	public Boolean getIsIndoor() {
+		return isIndoor;
+	}
+
+	public void setIsIndoor(Boolean isIndoor) {
+		this.isIndoor = isIndoor;
+	}
+
 	public void setCareInfo(PlantCareDetails careInfo) {
 		this.careInfo = careInfo;
 	}
@@ -88,7 +102,8 @@ public class PlantDetails {
 
 	@Override
 	public String toString() {
-		return "PlantDetails [id=" + id + ", name=" + name + ", imageUrl=" + imageUrl + ", temperature=" + temperature
-				+ ", water=" + water + ", description=" + description + ", careInfo=" + careInfo + "]";
+		return "PlantDetails [id=" + id + ", name=" + name + ", imageUrl=" + imageUrl + ", isIndoor=" + isIndoor
+				+ ", temperature=" + temperature + ", water=" + water + ", description=" + description + ", careInfo="
+				+ careInfo + "]";
 	}
 }

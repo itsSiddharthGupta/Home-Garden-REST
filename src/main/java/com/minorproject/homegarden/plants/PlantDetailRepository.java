@@ -1,7 +1,9 @@
 package com.minorproject.homegarden.plants;
 
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public interface PlantDetailRepository extends CrudRepository<PlantDetails, Long> {
+@Repository
+public interface PlantDetailRepository extends JpaRepository<PlantDetails, Long> {
 
 }

@@ -8,6 +8,8 @@ import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "plant_care_details")
 public class PlantCareDetails {
@@ -23,7 +25,11 @@ public class PlantCareDetails {
 	private String soilDetails;
 	@OneToOne(fetch = FetchType.LAZY)
 	@MapsId
+	@JsonIgnore
 	private PlantDetails plantInfo;
+
+	public PlantCareDetails() {
+	}
 
 	public PlantCareDetails(String waterDetails, String temperatureDetails, String lightDetails, String soilDetails) {
 		super();
