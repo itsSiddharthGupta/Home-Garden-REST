@@ -22,7 +22,7 @@ public class PlantDetails {
 	private String imageUrl;
 	private String temperature;
 	private String water;
-	@Column(nullable = false, name = "plant_description")
+	@Column(nullable = false, name = "plant_description", columnDefinition = "text", length = 10000)
 	private String description;
 	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "plantInfo")
 	private PlantCareDetails careInfo;
