@@ -2,6 +2,7 @@ package com.minorproject.homegarden.plants;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
@@ -20,7 +21,7 @@ public class PlantCareDetails {
 	private String lightDetails;
 	@Column(name = "soil_details", columnDefinition = "TEXT", length = 1000000)
 	private String soilDetails;
-	@OneToOne
+	@OneToOne(fetch = FetchType.LAZY)
 	@MapsId
 	private PlantDetails plantInfo;
 
