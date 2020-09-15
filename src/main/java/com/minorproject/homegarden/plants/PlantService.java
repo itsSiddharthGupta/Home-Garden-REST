@@ -90,7 +90,7 @@ public class PlantService {
 			Images img = new Images();
 			img.setImage(file.getBytes());
 			Images res = imagesRepo.save(img);
-			PlantDetails details = plantsRepo.getOne(id);
+			PlantDetails details = plantsRepo.findById(id).get();
 			details.setImageUrl(IMAGE_BASE_URL + res.getId());
 			plantsRepo.save(details);
 			Success<Long> suc = new Success<Long>("success", res.getId());
