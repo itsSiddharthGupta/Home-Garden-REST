@@ -1,12 +1,7 @@
 package com.minorproject.homegarden.plants;
 
-import java.sql.SQLException;
-import java.util.Iterator;
 import java.util.List;
 
-import org.hibernate.JDBCException;
-import org.hibernate.engine.jdbc.spi.SqlExceptionHelper;
-import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -65,6 +60,7 @@ public class PlantService {
 
 	public Result deletePlant(Long id) {
 		try {
+			deleteImage(id);
 			plantsRepo.deleteById(id);
 			Success<Long> suc = new Success<Long>("success", id);
 			return suc;
@@ -86,17 +82,29 @@ public class PlantService {
 	}
 
 	public Result uploadImage(Long id, MultipartFile file) {
-		try {
-			Images img = new Images();
-			img.setImage(file.getBytes());
-			Images res = imagesRepo.save(img);
-			PlantDetails details = plantsRepo.findById(id).get();
-			details.setImageUrl(IMAGE_BASE_URL + res.getId());
-			plantsRepo.save(details);
-			Success<Long> suc = new Success<Long>("success", res.getId());
-			return suc;
-		} catch (Exception e) {
-			Failure error = new Failure("failed", e.getLocalizedMessage());
+		PlantDetails details = plantsRepo.findById(id).get();
+		if (details != null) {
+			Images res = null;
+			try {
+				Images img = new Images();
+				img.setImage(file.getBytes());
+				res = imagesRepo.save(img);
+			} catch (Exception e) {
+				Failure error = new Failure("failed", e.getLocalizedMessage());
+				return error;
+			}
+			try {
+				details.setImageUrl(IMAGE_BASE_URL + res.getId());
+				plantsRepo.save(details);
+				Success<Long> suc = new Success<Long>("success", res.getId());
+				return suc;
+			} catch (Exception e) {
+				imagesRepo.delete(res);
+				Failure error = new Failure("failed", e.getLocalizedMessage());
+				return error;
+			}
+		} else {
+			Failure error = new Failure("failed", "Plant does not exist.");
 			return error;
 		}
 	}
