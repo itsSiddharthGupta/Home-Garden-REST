@@ -6,8 +6,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Lob;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.Type;
 
 @Entity
 @Table(name = "images")
@@ -16,7 +17,7 @@ public class Images {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
-	@Lob
+	@Type(type="org.hibernate.type.BinaryType")
 	private byte[] image;
 
 	public Images() {
