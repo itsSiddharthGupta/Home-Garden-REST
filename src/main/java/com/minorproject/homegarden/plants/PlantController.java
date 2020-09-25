@@ -39,7 +39,7 @@ public class PlantController {
 		return service.deletePlant(id);
 	}
 	
-	@RequestMapping(method = RequestMethod.GET, path = "/")
+	@RequestMapping(method = RequestMethod.GET, path = "/all")
 	public Result getAllPlants(){
 		return service.getAllPlants();
 	}
