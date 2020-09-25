@@ -1,5 +1,7 @@
 package com.minorproject.homegarden.plants;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,6 +24,11 @@ public class PlantController {
 		return service.addPlant(details);
 	}
 	
+	@RequestMapping(method = RequestMethod.POST, path = "/bulk_add")
+	public Result addNewPlant(@RequestBody List<PlantDetails> details){
+		return service.addPlantsInBulk(details);
+	}
+	
 	@RequestMapping(method = RequestMethod.PATCH, path = "/update")
 	public Result updatePlant(@RequestBody PlantDetails details){
 		return service.updatePlant(details);
@@ -35,6 +42,11 @@ public class PlantController {
 	@RequestMapping(method = RequestMethod.GET, path = "/")
 	public Result getAllPlants(){
 		return service.getAllPlants();
+	}
+	
+	@RequestMapping(method = RequestMethod.GET, path = "/")
+	public Result getPlant(@RequestParam("name") String name) {
+		return service.getPlantByName(name);
 	}
 	
 	@RequestMapping(method = RequestMethod.POST, path = "/upload/{plant_id}")
