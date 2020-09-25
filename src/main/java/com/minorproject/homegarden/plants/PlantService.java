@@ -37,7 +37,7 @@ public class PlantService {
 	}
 	
 	private PlantDetails addPlantInBulk(PlantDetails details) throws Exception{
-		PlantDetails plant = new PlantDetails(details.getName(), details.getDescription(), details.getIsIndoor());
+		PlantDetails plant = new PlantDetails(details.getName().toLowerCase(), details.getDescription(), details.getIsIndoor());
 		plant.setTemperature(details.getTemperature());
 		plant.setWater(details.getWater());
 		PlantCareDetails care = new PlantCareDetails(details.getCareInfo().getWaterDetails(),
@@ -54,7 +54,7 @@ public class PlantService {
 	}
 	
 	public Result addPlant(PlantDetails details) {
-		PlantDetails plant = new PlantDetails(details.getName(), details.getDescription(), details.getIsIndoor());
+		PlantDetails plant = new PlantDetails(details.getName().toLowerCase(), details.getDescription(), details.getIsIndoor());
 		plant.setTemperature(details.getTemperature());
 		plant.setWater(details.getWater());
 		PlantCareDetails care = new PlantCareDetails(details.getCareInfo().getWaterDetails(),
@@ -190,7 +190,7 @@ public class PlantService {
 
 	public Result getPlantByName(String name) {
 		try {
-			PlantDetails plant = plantsRepo.findByName(name);
+			PlantDetails plant = plantsRepo.findByName(name.toLowerCase());
 			Success<PlantDetails> suc = new Success<PlantDetails>("success", plant);
 			return suc;
 		} catch (Exception e) {
