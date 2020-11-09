@@ -198,4 +198,26 @@ public class PlantService {
 			return error;
 		}
 	}
+	
+	public Result getIndoorPlants() {
+		try {
+			List<PlantDetails> indoorPlants = plantsRepo.findByIsIndoor(true);
+			Success<List<PlantDetails>> suc = new Success<List<PlantDetails>>("success", indoorPlants);
+			return suc;
+		} catch (Exception e) {
+			Failure error = new Failure("failed", e.getLocalizedMessage());
+			return error;
+		}
+	}
+	
+	public Result getOutdoorPlants() {
+		try {
+			List<PlantDetails> outdoorPlants = plantsRepo.findByIsIndoor(true);
+			Success<List<PlantDetails>> suc = new Success<List<PlantDetails>>("success", outdoorPlants);
+			return suc;
+		} catch (Exception e) {
+			Failure error = new Failure("failed", e.getLocalizedMessage());
+			return error;
+		}
+	}
 }

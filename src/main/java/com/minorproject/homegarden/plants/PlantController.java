@@ -49,6 +49,16 @@ public class PlantController {
 		return service.getPlantByName(name);
 	}
 	
+	@RequestMapping(method = RequestMethod.GET, path = "/indoor")
+	public Result getIndoorPlant() {
+		return service.getIndoorPlants();
+	}
+	
+	@RequestMapping(method = RequestMethod.GET, path = "/outdoor")
+	public Result getOutdoorPlant() {
+		return service.getOutdoorPlants();
+	}
+	
 	@RequestMapping(method = RequestMethod.POST, path = "/upload/{plant_id}")
 	public Result uploadImage(@PathVariable("plant_id") Long id, @RequestParam("file") MultipartFile file){
 		return service.uploadImage(id, file);
