@@ -212,7 +212,7 @@ public class PlantService {
 	
 	public Result getOutdoorPlants() {
 		try {
-			List<PlantDetails> outdoorPlants = plantsRepo.findByIsIndoor(true);
+			List<PlantDetails> outdoorPlants = plantsRepo.findByIsIndoor(false);
 			Success<List<PlantDetails>> suc = new Success<List<PlantDetails>>("success", outdoorPlants);
 			return suc;
 		} catch (Exception e) {
